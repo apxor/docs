@@ -27,7 +27,7 @@ To add some more attributes that are specific to a particular user,
 ```java
 Attributes userInfo = new Attributes();
 userInfo.putAttribute("age", 27);
-userInfo.putAttribute("gender", “Male");
+userInfo.putAttribute("gender", "Male");
 ApxorSDK.setUserCustomInfo(userInfo);
 ```
 
@@ -57,7 +57,7 @@ Custom errors describe situations like LOGIN_FAILED, NETWORK_CALL_FAILED and are
 A custom error takes the exception itself and some context (what? OR which?) to make it easy for you identify. To report a custom error,
 
 ```java
-Exception e = new Exception(“LOGIN FAILED EXCEPTION”);
+Exception e = new Exception("LOGIN FAILED EXCEPTION");
 HashMap<String, String> additionalInfo = new HashMap<>();
 additionalInfo.put("email", "spock@vulcan.com");
 additionalInfo.put("cause", "network failure");
@@ -74,5 +74,27 @@ To track an event with the event name and properties.
 Attributes additionalInfo = new Attributes();
 additionalInfo.putAttribute("type", "Google");
 additionalInfo.putAttribute("language", "Valyrian");
-ApxorSDK.logAppEvent(“Login”, additionalInfo);
+ApxorSDK.logAppEvent("Login", additionalInfo);
+```
+
+#### Aggregate Events
+
+<!-- Description about Aggregate Event -->
+
+```java
+Attributes additionalInfo = new Attributes();
+additionalInfo.putAttribute("card_type", "Text");
+additionalInfo.putAttribute("id", "46Juzcyx");
+ApxorSDK.logAppEvent("Impression", additionalInfo, true);
+```
+
+#### Client Events
+
+<!-- Description about Client Event -->
+
+```java
+Attributes additionalInfo = new Attributes();
+additionalInfo.putAttribute("type", "Google");
+additionalInfo.putAttribute("language", "Valyrian");
+ApxorSDK.logClientEvent("Login", additionalInfo);
 ```

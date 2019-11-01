@@ -27,7 +27,7 @@ To add some more attributes that are specific to a particular user,
 ```java
 Attributes userInfo = new Attributes();
 userInfo.putAttribute("age", 27);
-userInfo.putAttribute("gender", “Male");
+userInfo.putAttribute("gender", "Male");
 ApxorSDK.setUserCustomInfo(userInfo);
 ```
 
@@ -57,7 +57,7 @@ Custom errors describe situations like LOGIN_FAILED, NETWORK_CALL_FAILED and are
 A custom error takes the exception itself and some context (what? OR which?) to make it easy for you identify. To report a custom error,
 
 ```java
-Exception e = new Exception(“LOGIN FAILED EXCEPTION”);
+Exception e = new Exception("LOGIN FAILED EXCEPTION");
 HashMap<String, String> additionalInfo = new HashMap<>();
 additionalInfo.put("email", "spock@vulcan.com");
 additionalInfo.put("cause", "network failure");
@@ -74,5 +74,32 @@ To track an event with the event name and properties.
 Attributes additionalInfo = new Attributes();
 additionalInfo.putAttribute("type", "Google");
 additionalInfo.putAttribute("language", "Valyrian");
-ApxorSDK.logAppEvent(“Login”, additionalInfo);
+ApxorSDK.logAppEvent("Login", additionalInfo);
+```
+
+#### Aggregate Events
+
+Events that are not required for an in-depth analysis but are useful as quantitative metrics are called Aggregate Events. Only their aggregate counts will be sent to Apxor to reduce unnecessary transfer and storage of data, minimising overhead and costs.
+
+Eg : Measuring if an article is viewed by a user if it is visible in the view port (visible part of the screen) for five seconds can be logged as an aggregate event to count the impressions of a particular article.
+
+```java
+Attributes additionalInfo = new Attributes();
+additionalInfo.putAttribute("card_type", "Text");
+additionalInfo.putAttribute("id", "46Juzcyx");
+ApxorSDK.logAppEvent("Impression", additionalInfo, true);
+```
+
+#### Client Events
+
+Events that are logged to reside on the client application are called client events, the data captured is not transferred to Apxor.
+
+These are typically logged to capture behavioural observations and interactions to nudge a user.
+
+Eg: Soft back button, user reaching end of page, etc.
+
+```java
+Attributes additionalInfo = new Attributes();
+additionalInfo.putAttribute("Screen", "com.example.app.SettingsActivity");
+ApxorSDK.logClientEvent("SoftBackPressed", additionalInfo);
 ```

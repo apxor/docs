@@ -79,7 +79,9 @@ ApxorSDK.logAppEvent("Login", additionalInfo);
 
 #### Aggregate Events
 
-<!-- Description about Aggregate Event -->
+Events that are not required for an in-depth analysis but are useful as quantitative metrics are called Aggregate Events. Only their aggregate counts will be sent to Apxor to reduce unnecessary transfer and storage of data, minimising overhead and costs.
+
+Eg : Measuring if an article is viewed by a user if it is visible in the view port (visible part of the screen) for five seconds can be logged as an aggregate event to count the impressions of a particular article.
 
 ```java
 Attributes additionalInfo = new Attributes();
@@ -90,11 +92,14 @@ ApxorSDK.logAppEvent("Impression", additionalInfo, true);
 
 #### Client Events
 
-<!-- Description about Client Event -->
+Events that are logged to reside on the client application are called client events, the data captured is not transferred to Apxor.
+
+These are typically logged to capture behavioural observations and interactions to nudge a user.
+
+Eg: Soft back button, user reaching end of page, etc.
 
 ```java
 Attributes additionalInfo = new Attributes();
-additionalInfo.putAttribute("type", "Google");
-additionalInfo.putAttribute("language", "Valyrian");
-ApxorSDK.logClientEvent("Login", additionalInfo);
+additionalInfo.putAttribute("Screen", "com.example.app.SettingsActivity");
+ApxorSDK.logClientEvent("SoftBackPressed", additionalInfo);
 ```
